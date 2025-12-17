@@ -1,10 +1,10 @@
 #!/bin/bash
 
-SCRIPT_VERSION="2.2.3a"
+SCRIPT_VERSION="2.1.10a"
 UPDATE_AVAILABLE=false
 DIR_REMNAWAVE="/usr/local/remnawave_reverse/"
 LANG_FILE="${DIR_REMNAWAVE}selected_language"
-SCRIPT_URL="https://raw.githubusercontent.com/arslansai90/remnawave-reverse-proxy/refs/heads/main/install_remnawave.sh"
+SCRIPT_URL="https://raw.githubusercontent.com/eGamesAPI/remnawave-reverse-proxy/refs/heads/main/install_remnawave.sh"
 
 COLOR_RESET="\033[0m"
 COLOR_GREEN="\033[1;32m"
@@ -84,7 +84,7 @@ set_language() {
                 [MENU_2]="Reinstall panel/node"
                 [MENU_3]="Manage Panel/Node"
                 [MENU_4]="Install random template for selfsteal node"
-                [MENU_5]="Custom subscriptions by legiz"
+                [MENU_5]="Custom Templates by legiz"
                 [MENU_6]="Extensions by distillium"
                 [MENU_7]="Manage IPv6"
                 [MENU_8]="Manage certificates domain"
@@ -193,8 +193,7 @@ set_language() {
                 #API
                 [REGISTERING_REMNAWAVE]="Registration in Remnawave"
                 [CHECK_CONTAINERS]="Checking containers availability..."
-                [CONTAINERS_NOT_READY_ATTEMPT]="Containers are not ready, waiting... Attempt %d of %d."
-                [CONTAINERS_TIMEOUT]="Containers not ready after %d attempts.\n\nCheck logs:\n  cd /opt/remnawave && docker compose logs -f\n\nAlso check typical Docker issues:\n  https://wiki.egam.es/troubleshooting/docker-issues/"
+                [CONTAINERS_NOT_READY]="Containers are not ready, waiting..."
                 [REGISTRATION_SUCCESS]="Registration completed successfully!"
                 [GET_PUBLIC_KEY]="Getting public key..."
                 [PUBLIC_KEY_SUCCESS]="Public key successfully obtained"
@@ -270,7 +269,7 @@ set_language() {
                 [SELFSTEAL]="Enter the selfsteal domain for the node specified during panel installation:"
                 [PANEL_IP_PROMPT]="Enter the IP address of the panel to establish a connection between the panel and the node:"
                 [IP_ERROR]="Enter a valid IP address in the format X.X.X.X (e.g., 192.168.1.1)"
-                [CERT_PROMPT]="Enter the certificate obtained from the panel (paste the content and press Enter twice):"
+                [CERT_PROMPT]="Enter the certificate obtained from the panel, keeping the SSL_CERT= line (paste the content and press Enter twice):"
                 [CERT_CONFIRM]="Are you sure the certificate is correct? (y/n):"
                 [ABORT_MESSAGE]="Installation aborted by user"
                 [SUCCESS_MESSAGE]="Node successfully connected"
@@ -328,7 +327,7 @@ set_language() {
                 [CERT_METHOD_PROMPT]="Select certificate generation method for all domains:"
                 [CERT_METHOD_CF]="Cloudflare API (supports wildcard)"
                 [CERT_METHOD_ACME]="ACME HTTP-01 (single domain, no wildcard)"
-                [CERT_METHOD_CHOOSE]="Select action (0-2):"
+                [CERT_METHOD_CHOOSE]="Select option (0-2):"
                 [EMAIL_PROMPT]="Enter your email for Let's Encrypt registration:"
                 [CERTS_SKIPPED]="All certificates already exist. Skipping generation."
                 [ACME_METHOD]="Using ACME (Let's Encrypt) with HTTP-01 challenge (no wildcard support)..."
@@ -349,7 +348,7 @@ set_language() {
                 [SIMPLE_WEB_TEMPLATES]="Simple web templates"
                 [SNI_TEMPLATES]="Sni templates"
                 [NOTHING_TEMPLATES]="Nothing Sni templates"
-                [CHOOSE_TEMPLATE_OPTION]="Select action (0-3):"
+                [CHOOSE_TEMPLATE_OPTION]="Select option (0-3):"
                 [INVALID_TEMPLATE_CHOICE]="Invalid choice. Please select 0-3."
                 # Manage Panel Access
                 [PORT_8443_OPEN]="Open port 8443 for panel access"
@@ -366,7 +365,7 @@ set_language() {
                 [UFW_RELOAD_FAILED]="Failed to reload UFW."
                 [PORT_8443_ALREADY_CLOSED]="Port 8443 already closed in UFW."
                 #Legiz Extensions
-                [LEGIZ_EXTENSIONS_PROMPT]="Select action (0-2):"
+                [LEGIZ_EXTENSIONS_PROMPT]="Select action (0-3):"
                 # Sub Page Upload
                 [UPLOADING_SUB_PAGE]="Uploading custom sub page template..."
                 [ERROR_FETCH_SUB_PAGE]="Failed to fetch custom sub page template."
@@ -414,6 +413,31 @@ set_language() {
                 [CONFIRM_DELETE_APP]="Are you sure you want to delete application %s from platform %s? (y/n):"
                 [APP_DELETED_SUCCESS]="Application successfully deleted"
                 [NO_APPS_FOUND]="No applications found in this platform"
+                # Template Upload
+                [TEMPLATE_NOT_APPLIED]="Custom rules template not applied"
+                [UPLOADING_TEMPLATE]="Uploading custom rules template..."
+                [ERROR_FETCH_TEMPLATE]="Failed to fetch custom rules template."
+                [ERROR_EMPTY_RESPONSE_TEMPLATE]="Empty response from API when updating template."
+                [ERROR_UPDATE_TEMPLATE]="Failed to update custom rules template"
+                [TEMPLATE_UPDATED_SUCCESS]="Custom rules template successfully updated."
+                [SELECT_TEMPLATE_CUSTOM]="Select action (0-8):"
+                [SELECT_TEMPLATE_CUSTOM1]="Custom Rules Templates"
+                [SELECT_TEMPLATE_CUSTOM2]="Custom Rules Templates\nOnly run on panel server"
+                [TEMPLATE_SELECT_CHOICE]="Invalid choice. Please select 0-8."
+                [DOWNLOADING_CONFIG_SEED]="Downloading config.seed.ts from GitHub..."
+                [EXTRACT_FAILED]="Failed to extract configuration for %s"
+                [RESTORING_DEFAULT_TEMPLATES]="Restoring default custom rules templates from GitHub..."
+                [DEFAULT_TEMPLATES_COMPLETED]="Default custom rules templates restoration completed"
+                [RESTORING_TEMPLATE]="Restoring default custom rules template for %s..."
+                [TEMPLATE_RESTORED_SUCCESS]="Default custom rules template for %s restored successfully"
+                [URL_NOT_ACCESSIBLE]="URL %s is not accessible (HTTP status: %s)"
+                [FAILED_TO_DOWNLOAD_TEMPLATE]="Failed to download custom rules template %s"
+                [TEMPLATE_EMPTY]="Downloaded custom rules template %s is empty"
+                [INVALID_YAML_TEMPLATE]="Invalid YAML custom rules template for %s"
+                [INVALID_JSON_TEMPLATE]="Invalid JSON custom rules template for %s"
+                [EMPTY_TEMPLATE_VALUE]="Empty custom rules template value for %s"
+                [RESTORE_TEMPLATES]="Restore default custom rules templates"
+                [FAILED_TO_EXTRACT_UUID]="Failed to extract UUID from subscription template"
                 [RENEWAL_CONF_NOT_FOUND]="Renewal configuration file not found."
                 [ARCHIVE_DIR_MISMATCH]="Archive directory mismatch in configuration."
                 [CERT_VERSION_NOT_FOUND]="Failed to determine certificate version."
@@ -477,7 +501,7 @@ set_language() {
                 [MENU_2]="Переустановить панель/ноду"
                 [MENU_3]="Управление панелью/нодой"
                 [MENU_4]="Установить случайный шаблон для selfsteal ноды"
-                [MENU_5]="Кастомные подписки от legiz"
+                [MENU_5]="Кастомные шаблоны от legiz"
                 [MENU_6]="Управление расширениями от distillium"
                 [MENU_7]="Управление IPv6"
                 [MENU_8]="Управление сертификатами домена"
@@ -586,8 +610,7 @@ set_language() {
                 #API
                 [REGISTERING_REMNAWAVE]="Процесс регистрации в Remnawave"
                 [CHECK_CONTAINERS]="Проверка доступности контейнеров..."
-                [CONTAINERS_NOT_READY_ATTEMPT]="Контейнеры не готовы, ожидание... Попытка %d из %d."
-                [CONTAINERS_TIMEOUT]="Контейнеры не готовы после %d попыток.\n\nПроверьте логи:\n  cd /opt/remnawave && docker compose logs -f\n\nТакже посмотрите типичные ошибки Docker:\n  https://wiki.egam.es/ru/troubleshooting/docker-issues/"
+                [CONTAINERS_NOT_READY]="Контейнеры не готовы, ожидание..."
                 [REGISTRATION_SUCCESS]="Регистрация прошла успешно!"
                 [GET_PUBLIC_KEY]="Получаем публичный ключ..."
                 [PUBLIC_KEY_SUCCESS]="Публичный ключ успешно получен"
@@ -662,7 +685,7 @@ set_language() {
                 [SELFSTEAL]="Введите selfsteal домен для ноды, который указали при установке панели:"
                 [PANEL_IP_PROMPT]="Введите IP адрес панели, чтобы установить соединение между панелью и ноды:"
                 [IP_ERROR]="Введите корректный IP-адрес в формате X.X.X.X (например, 192.168.1.1)"
-                [CERT_PROMPT]="Введите сертификат, полученный от панели (вставьте содержимое и 2 раза нажмите Enter):"
+                [CERT_PROMPT]="Введите сертификат, полученный от панели, сохраняя строку SSL_CERT= (вставьте содержимое и 2 раза нажмите Enter):"
                 [CERT_CONFIRM]="Вы уверены, что сертификат правильный? (y/n):"
                 [ABORT_MESSAGE]="Установка прервана пользователем"
                 [SUCCESS_MESSAGE]="Нода успешно подключена"
@@ -758,7 +781,7 @@ set_language() {
                 [UFW_RELOAD_FAILED]="Не удалось перезагрузить UFW."
                 [PORT_8443_ALREADY_CLOSED]="Порт 8443 уже закрыт в UFW."
                 #Legiz Extensions
-                [LEGIZ_EXTENSIONS_PROMPT]="Выберите действие (0-2):"
+                [LEGIZ_EXTENSIONS_PROMPT]="Выберите действие (0-3):"
                 # Sub Page Upload
                 [UPLOADING_SUB_PAGE]="Загрузка пользовательского шаблона страницы подписки..."
                 [ERROR_FETCH_SUB_PAGE]="Не удалось получить пользовательский шаблон страницы подписки."
@@ -806,6 +829,29 @@ set_language() {
                 [CONFIRM_DELETE_APP]="Вы точно хотите удалить приложение %s из списка платформы %s? (y/n):"
                 [APP_DELETED_SUCCESS]="Приложение успешно удалено"
                 [NO_APPS_FOUND]="Приложения не найдены в этой платформе"
+                # Template Upload
+                [TEMPLATE_NOT_APPLIED]="Шаблон правил не применён"
+                [UPLOADING_TEMPLATE]="Загрузка шаблона правил..."
+                [ERROR_FETCH_TEMPLATE]="Не удалось загрузить шаблон правил."
+                [ERROR_EMPTY_RESPONSE_TEMPLATE]="Пустой ответ от API при обновлении шаблона правил."
+                [ERROR_UPDATE_TEMPLATE]="Не удалось обновить шаблон правил"
+                [TEMPLATE_UPDATED_SUCCESS]="Шаблон правил успешно обновлён."
+                [SELECT_TEMPLATE_CUSTOM]="Выберите действие (0-8):"
+                [SELECT_TEMPLATE_CUSTOM1]="Шаблоны правил"
+                [SELECT_TEMPLATE_CUSTOM2]="Шаблоны правил\nЗапускать только на сервере с панелью"
+                [TEMPLATE_SELECT_CHOICE]="Неверный выбор. Выберите 0-8."
+                [RESTORING_DEFAULT_TEMPLATES]="Восстановление шаблонов правил по умолчанию из GitHub..."
+                [DEFAULT_TEMPLATES_COMPLETED]="Восстановление шаблонов правил по умолчанию завершено"
+                [RESTORING_TEMPLATE]="Восстановление шаблона по умолчанию для %s..."
+                [TEMPLATE_RESTORED_SUCCESS]="Шаблон по умолчанию для %s успешно восстановлен"
+                [URL_NOT_ACCESSIBLE]="URL %s недоступен (HTTP статус: %s)"
+                [FAILED_TO_DOWNLOAD_TEMPLATE]="Не удалось загрузить шаблон %s"
+                [TEMPLATE_EMPTY]="Загруженный шаблон %s пуст"
+                [INVALID_YAML_TEMPLATE]="Недопустимый YAML-шаблон для %s"
+                [INVALID_JSON_TEMPLATE]="Недопустимый JSON-шаблон для %s"
+                [EMPTY_TEMPLATE_VALUE]="Пустое значение шаблона для %s"
+                [RESTORE_TEMPLATES]="Восстановить шаблоны правил по умолчанию"
+                [FAILED_TO_EXTRACT_UUID]="Не удалось извлечь UUID шаблона подписки"
                 [RENEWAL_CONF_NOT_FOUND]="Файл конфигурации обновления сертификатов не найден."
                 [ARCHIVE_DIR_MISMATCH]="Несоответствие директории архива в конфигурации."
                 [CERT_VERSION_NOT_FOUND]="Не удалось определить версию сертификатов."
@@ -904,7 +950,7 @@ start_panel_node() {
 
     cd "$dir" || { echo -e "${COLOR_RED}${LANG[CHANGE_DIR_FAILED]} $dir${COLOR_RESET}"; exit 1; }
 
-    if docker ps -q --filter "ancestor=remnawave/backend:2.2.6" | grep -q . || docker ps -q --filter "ancestor=remnawave/node:2.2.6" | grep -q . || docker ps -q --filter "ancestor=remnawave/backend:2" | grep -q .; then
+    if docker ps -q --filter "ancestor=remnawave/backend:2.2.6" | grep -q . || docker ps -q --filter "ancestor=remnawave/node:2.2.6" | grep -q .; then
         echo -e "${COLOR_GREEN}${LANG[PANEL_RUNNING]}${COLOR_RESET}"
     else
         echo -e "${COLOR_YELLOW}${LANG[STARTING_PANEL_NODE]}...${COLOR_RESET}"
@@ -925,7 +971,7 @@ stop_panel_node() {
     fi
 
     cd "$dir" || { echo -e "${COLOR_RED}${LANG[CHANGE_DIR_FAILED]} $dir${COLOR_RESET}"; exit 1; }
-    if ! docker ps -q --filter "ancestor=remnawave/backend:2.2.6" | grep -q . && ! docker ps -q --filter "ancestor=remnawave/node:2.2.6" | grep -q . && ! docker ps -q --filter "ancestor=remnawave/backend:2" | grep -q .; then
+    if ! docker ps -q --filter "ancestor=remnawave/backend:2.2.6" | grep -q . && ! docker ps -q --filter "ancestor=remnawave/node:2.2.6" | grep -q .; then
         echo -e "${COLOR_GREEN}${LANG[PANEL_STOPPED]}${COLOR_RESET}"
     else
         echo -e "${COLOR_YELLOW}${LANG[STOPPING_REMNAWAVE]}...${COLOR_RESET}"
@@ -1497,7 +1543,7 @@ view_logs() {
 
     cd "$dir" || { echo -e "${COLOR_RED}${LANG[CHANGE_DIR_FAILED]} $dir${COLOR_RESET}"; exit 1; }
 
-    if ! docker ps -q --filter "ancestor=remnawave/backend:2.2.6" | grep -q . && ! docker ps -q --filter "ancestor=remnawave/node:2.2.6" | grep -q . && ! docker ps -q --filter "ancestor=remnawave/backend:2" | grep -q .; then
+    if ! docker ps -q --filter "ancestor=remnawave/backend:2.2.6" | grep -q . && ! docker ps -q --filter "ancestor=remnawave/node:2.2.6" | grep -q .; then
         echo -e "${COLOR_RED}${LANG[CONTAINER_NOT_RUNNING]}${COLOR_RESET}"
         exit 1
     fi
@@ -1682,7 +1728,7 @@ manage_warp() {
 
     case $WARP_OPTION in
         1)
-            if ! grep -q "remnanode:" /opt/remnawave/docker-compose.yml; then
+            if [ ! -f "/opt/remnawave/.env-node" ]; then
                 echo -e "${COLOR_RED}${LANG[WARP_NO_NODE]}${COLOR_RESET}"
                 exit 1
             fi
@@ -2019,13 +2065,14 @@ disable_ipv6() {
 }
 #Manage IPv6
 
-#Extensions by legiz
+#Custom Templates and Extensions by legiz
 show_custom_legiz_menu() {
     echo -e ""
     echo -e "${COLOR_GREEN}${LANG[MENU_5]}${COLOR_RESET}"
     echo -e ""
-    echo -e "${COLOR_YELLOW}1. ${LANG[SELECT_SUB_PAGE_CUSTOM1]}${COLOR_RESET}" # Custom sub page
-    echo -e "${COLOR_YELLOW}2. ${LANG[CUSTOM_APP_LIST_MENU]}${COLOR_RESET}" # Edit custom app list and branding
+    echo -e "${COLOR_YELLOW}1. ${LANG[SELECT_TEMPLATE_CUSTOM1]}${COLOR_RESET}" # Custom templates
+    echo -e "${COLOR_YELLOW}2. ${LANG[SELECT_SUB_PAGE_CUSTOM1]}${COLOR_RESET}" # Custom sub page
+    echo -e "${COLOR_YELLOW}3. ${LANG[CUSTOM_APP_LIST_MENU]}${COLOR_RESET}" # Edit custom app list and branding
     echo -e ""
     echo -e "${COLOR_YELLOW}0. ${LANG[EXIT]}${COLOR_RESET}"
     echo -e ""
@@ -2036,6 +2083,11 @@ manage_custom_legiz() {
     reading "${LANG[LEGIZ_EXTENSIONS_PROMPT]}" LEGIZ_OPTION
     case $LEGIZ_OPTION in
         1)
+            manage_template_upload
+            log_clear
+            manage_custom_legiz
+            ;;
+        2)
             if ! command -v yq >/dev/null 2>&1; then
                 echo -e "${COLOR_YELLOW}${LANG[INSTALLING_YQ]}${COLOR_RESET}"
                 
@@ -2071,7 +2123,7 @@ manage_custom_legiz() {
             log_clear
             manage_custom_legiz
             ;;
-        2)
+        3)
             manage_custom_app_list
             log_clear
             manage_custom_legiz
@@ -2087,6 +2139,281 @@ manage_custom_legiz() {
             manage_custom_legiz
             ;;
     esac
+}
+
+show_template_menu() {
+    echo -e ""
+    echo -e "${COLOR_GREEN}${LANG[SELECT_TEMPLATE_CUSTOM2]}${COLOR_RESET}"
+    echo -e ""
+    echo -e "${COLOR_YELLOW}1. Xray json | without RU${COLOR_RESET}"
+    echo -e "${COLOR_YELLOW}2. Xray json | RU-BUNDLE${COLOR_RESET}"
+    echo -e "${COLOR_YELLOW}3. Xray json | RU-BUNDLE + CATEGORY-ADS-ALL BLOCK (not work on iOS)${COLOR_RESET}"
+    echo -e "${COLOR_YELLOW}4. Mihomo    | RU-BUNDLE + RE-FILTER + OISD BIG (ADBLOCK)${COLOR_RESET}"
+    echo -e "${COLOR_YELLOW}5. Mihomo    | full proxy without RU${COLOR_RESET}"
+    echo -e "${COLOR_YELLOW}6. Singbox   | RU-BUNDLE${COLOR_RESET}"
+    echo -e "${COLOR_YELLOW}7. Singbox   | RU-BUNDLE + OISD BIG (ADBLOCK)${COLOR_RESET}"
+    echo -e "${COLOR_YELLOW}8. ${LANG[RESTORE_TEMPLATES]}${COLOR_RESET}"
+    echo -e ""
+    echo -e "${COLOR_YELLOW}0. ${LANG[EXIT]}${COLOR_RESET}"
+    echo -e ""
+}
+
+manage_template_upload() {
+    if ! docker ps -a --filter "name=remnawave" --format '{{.Names}}' | grep -q "^remnawave$"; then
+        printf "${COLOR_RED}${LANG[CONTAINER_NOT_FOUND]}${COLOR_RESET}\n" "remnawave"
+        sleep 2
+        log_clear
+        exit 1
+    fi
+    
+    show_template_menu
+    reading "${LANG[SELECT_TEMPLATE_CUSTOM]}" TEMPLATE_OPTION
+    case $TEMPLATE_OPTION in
+        1)
+            update_subscription_template "XRAY_JSON" "https://raw.githubusercontent.com/remnawave/templates/refs/heads/main/by-legiz/subscription-templates/xray-json-simple-without-ru.json" "false"
+            ;;
+        2)
+            update_subscription_template "XRAY_JSON" "https://raw.githubusercontent.com/remnawave/templates/refs/heads/main/by-legiz/subscription-templates/xray-json-ru-bundle.json" "false"
+            ;;
+        3)
+            update_subscription_template "XRAY_JSON" "https://raw.githubusercontent.com/remnawave/templates/refs/heads/main/by-legiz/subscription-templates/xray-json-ru-bundle-category-ads-all.json" "false"
+            ;;
+        4)
+            update_subscription_template "MIHOMO" "https://raw.githubusercontent.com/remnawave/templates/refs/heads/main/by-legiz/subscription-templates/mihomo-ru-bundle.yaml" "true"
+            ;;
+        5)
+            update_subscription_template "MIHOMO" "https://raw.githubusercontent.com/remnawave/templates/refs/heads/main/by-legiz/subscription-templates/mihomo-simple-without-ru.yaml" "true"
+            ;;
+        6)
+            update_subscription_template "SINGBOX" "https://raw.githubusercontent.com/remnawave/templates/refs/heads/main/by-legiz/subscription-templates/singbox-ru-bundle.json" "false"
+            ;;
+        7)
+            update_subscription_template "SINGBOX" "https://raw.githubusercontent.com/remnawave/templates/refs/heads/main/by-legiz/subscription-templates/singbox-ru-bundle-oisd-big.json" "false"
+            ;;
+        8)
+            restore_default_templates
+            ;;
+        0)
+            echo -e "${COLOR_YELLOW}${LANG[EXIT]}${COLOR_RESET}"
+            return 0
+            ;;
+        *)
+            echo -e "${COLOR_YELLOW}${LANG[TEMPLATE_SELECT_CHOICE]}${COLOR_RESET}"
+            sleep 2
+            log_clear
+            manage_template_upload
+            ;;
+    esac
+}
+
+restore_default_templates() {
+    echo -e "${COLOR_YELLOW}${LANG[RESTORING_DEFAULT_TEMPLATES]}${COLOR_RESET}"
+
+    local domain_url="127.0.0.1:3000"
+    TEMP_DIR="/tmp/remnawave_templates"
+
+    get_panel_token
+    token=$(cat "$TOKEN_FILE")
+
+    mkdir -p "$TEMP_DIR"
+
+    local template_configs=(
+        "CLASH|https://raw.githubusercontent.com/remnawave/templates/refs/heads/main/remnawave-default/subscription-templates/clash.yaml|yaml"
+        "MIHOMO|https://raw.githubusercontent.com/remnawave/templates/refs/heads/main/remnawave-default/subscription-templates/mihomo.yaml|yaml"
+        "STASH|https://raw.githubusercontent.com/remnawave/templates/refs/heads/main/remnawave-default/subscription-templates/stash.yaml|yaml"
+        "SINGBOX|https://raw.githubusercontent.com/remnawave/templates/refs/heads/main/remnawave-default/subscription-templates/singbox.json|json"
+        "SINGBOX_LEGACY|https://raw.githubusercontent.com/remnawave/templates/refs/heads/main/remnawave-default/subscription-templates/singbox-legacy.json|json"
+        "XRAY_JSON|https://raw.githubusercontent.com/remnawave/templates/refs/heads/main/remnawave-default/subscription-templates/xray-json.json|json"
+    )
+
+    for template_entry in "${template_configs[@]}"; do
+        IFS='|' read -r template_type template_url template_format <<< "$template_entry"
+        printf "${COLOR_YELLOW}${LANG[RESTORING_TEMPLATE]}${COLOR_RESET}\n" "$template_type"
+
+        local http_status=$(curl -s -L --write-out "%{http_code}" --output /dev/null "$template_url")
+        if [ "$http_status" != "200" ]; then
+            printf "${COLOR_RED}${LANG[URL_NOT_ACCESSIBLE]}${COLOR_RESET}\n" "$template_url" "$http_status"
+            continue
+        fi
+
+        local temp_file="$TEMP_DIR/$template_type.$template_format"
+        if ! curl -s -L -o "$temp_file" "$template_url"; then
+            printf "${COLOR_RED}${LANG[FAILED_TO_DOWNLOAD_TEMPLATE]}${COLOR_RESET}\n" "$template_type"
+            rm -f "$temp_file"
+            continue
+        fi
+
+        if [ ! -s "$temp_file" ]; then
+            printf "${COLOR_RED}${LANG[TEMPLATE_EMPTY]}${COLOR_RESET}\n" "$template_type"
+            rm -f "$temp_file"
+            continue
+        fi
+
+        local template_content
+        template_content=$(cat "$temp_file")
+
+        local template_field template_value
+        if [ "$template_format" = "yaml" ]; then
+            if command -v yq >/dev/null 2>&1; then
+                if ! echo "$template_content" | yq e '.' - >/dev/null 2>&1; then
+                    printf "${COLOR_RED}${LANG[INVALID_YAML_TEMPLATE]}${COLOR_RESET}\n" "$template_type"
+                    rm -f "$temp_file"
+                    continue
+                fi
+            fi
+            template_field="encodedTemplateYaml"
+            template_value=$(echo "$template_content" | base64 -w 0)
+        else
+            if ! echo "$template_content" | jq . >/dev/null 2>&1; then
+                printf "${COLOR_RED}${LANG[INVALID_JSON_TEMPLATE]}${COLOR_RESET}\n" "$template_type"
+                rm -f "$temp_file"
+                continue
+            fi
+            template_field="templateJson"
+            template_value=$(echo "$template_content" | jq -c .)
+        fi
+
+        if [ -z "$template_value" ]; then
+            printf "${COLOR_RED}${LANG[EMPTY_TEMPLATE_VALUE]}${COLOR_RESET}\n" "$template_type"
+            rm -f "$temp_file"
+            continue
+        fi
+
+        local get_response=$(make_api_request "GET" "http://$domain_url/api/subscription-templates/$template_type" "$token")
+        if [ -z "$get_response" ]; then
+            echo -e "${COLOR_RED}${LANG[ERROR_EMPTY_RESPONSE_TEMPLATE]}${COLOR_RESET}"
+            rm -f "$temp_file"
+            continue
+        fi
+
+        if ! echo "$get_response" | jq -e '.response' > /dev/null; then
+            echo -e "${COLOR_RED}${LANG[ERROR_UPDATE_TEMPLATE]}: $get_response${COLOR_RESET}"
+            rm -f "$temp_file"
+            continue
+        fi
+
+        local uuid=$(echo "$get_response" | jq -r '.response.uuid // null')
+        if [ -z "$uuid" ] || [ "$uuid" == "null" ]; then
+            echo -e "${COLOR_RED}Не удалось извлечь UUID для шаблона $template_type${COLOR_RESET}"
+            rm -f "$temp_file"
+            continue
+        fi
+
+        if [ "$template_format" = "yaml" ]; then
+            local request_body=$(jq -n --arg template "$template_value" \
+                                      --arg type "$template_type" \
+                                      --arg uuid "$uuid" \
+                                      '{encodedTemplateYaml: $template, templateType: $type, templateJson: {}, uuid: $uuid}')
+        else
+            local request_body=$(jq -n --argjson template "$template_value" \
+                                      --arg type "$template_type" \
+                                      --arg uuid "$uuid" \
+                                      '{templateJson: $template, templateType: $type, encodedTemplateYaml: "", uuid: $uuid}')
+        fi
+
+        local response=$(make_api_request "PUT" "http://$domain_url/api/subscription-templates" "$token" "$request_body")
+        if [ -z "$response" ]; then
+            echo -e "${COLOR_RED}${LANG[ERROR_EMPTY_RESPONSE_TEMPLATE]}${COLOR_RESET}"
+            rm -f "$temp_file"
+            continue
+        fi
+
+        if echo "$response" | jq -e '.response | select(.uuid != null)' > /dev/null; then
+            printf "${COLOR_GREEN}${LANG[TEMPLATE_RESTORED_SUCCESS]}${COLOR_RESET}\n" "$template_type"
+        else
+            echo -e "${COLOR_RED}${LANG[ERROR_UPDATE_TEMPLATE]}: Шаблон для $template_type не применён${COLOR_RESET}"
+        fi
+
+        rm -f "$temp_file"
+    done
+
+    rm -rf "$TEMP_DIR"
+    echo -e "${COLOR_GREEN}${LANG[DEFAULT_TEMPLATES_COMPLETED]}${COLOR_RESET}"
+    return 0
+}
+
+update_subscription_template() {
+    local template_type="$1"
+    local template_url="$2"
+    local is_yaml_template="$3" # "true" for YAML, "false" for JSON
+    local domain_url="127.0.0.1:3000"
+
+    echo -e "${COLOR_YELLOW}${LANG[UPLOADING_TEMPLATE]}${COLOR_RESET}"
+
+    local template_content=$(curl -s "$template_url")
+    if [ -z "$template_content" ]; then
+        echo -e "${COLOR_RED}${LANG[ERROR_FETCH_TEMPLATE]}${COLOR_RESET}"
+        return 1
+    fi
+
+    if [ "$is_yaml_template" = "true" ]; then
+        if command -v yq >/dev/null 2>&1; then
+            if ! echo "$template_content" | yq e '.' - >/dev/null 2>&1; then
+                echo -e "${COLOR_RED}Invalid YAML template from $template_url${COLOR_RESET}"
+                return 1
+            fi
+        else
+            if [ -z "$template_content" ]; then
+                echo -e "${COLOR_RED}Invalid YAML template: empty content from $template_url${COLOR_RESET}"
+                return 1
+            fi
+        fi
+        template_field="encodedTemplateYaml"
+        template_value=$(echo "$template_content" | base64 -w 0)
+    else
+        if ! echo "$template_content" | jq . >/dev/null 2>&1; then
+            echo -e "${COLOR_RED}Invalid JSON template from $template_url${COLOR_RESET}"
+            return 1
+        fi
+        template_field="templateJson"
+        template_value="$template_content"
+    fi
+
+    get_panel_token
+    token=$(cat "$TOKEN_FILE")
+
+    local get_response=$(make_api_request "GET" "http://$domain_url/api/subscription-templates/$template_type" "$token")
+    if [ -z "$get_response" ]; then
+        echo -e "${COLOR_RED}${LANG[ERROR_EMPTY_RESPONSE_TEMPLATE]}${COLOR_RESET}"
+        return 1
+    fi
+
+    if ! echo "$get_response" | jq -e '.response' > /dev/null; then
+        echo -e "${COLOR_RED}${LANG[ERROR_UPDATE_TEMPLATE]}: $get_response${COLOR_RESET}"
+        return 1
+    fi
+    local uuid=$(echo "$get_response" | jq -r '.response.uuid // null')
+    if [ -z "$uuid" ] || [ "$uuid" == "null" ]; then
+        echo -e "${COLOR_RED}${LANG[FAILED_TO_EXTRACT_UUID]}${COLOR_RESET}"
+        return 1
+    fi
+
+    if [ "$is_yaml_template" = "true" ]; then
+        local request_body=$(jq -n --arg template "$template_value" \
+                                  --arg type "$template_type" \
+                                  --arg uuid "$uuid" \
+                                  '{encodedTemplateYaml: $template, templateType: $type, templateJson: {}, uuid: $uuid}')
+    else
+        local request_body=$(jq -n --argjson template "$template_value" \
+                                  --arg type "$template_type" \
+                                  --arg uuid "$uuid" \
+                                  '{templateJson: $template, templateType: $type, encodedTemplateYaml: "", uuid: $uuid}')
+    fi
+
+    local response=$(make_api_request "PUT" "http://$domain_url/api/subscription-templates" "$token" "$request_body")
+
+    if [ -z "$response" ]; then
+        echo -e "${COLOR_RED}${LANG[ERROR_EMPTY_RESPONSE_TEMPLATE]}${COLOR_RESET}"
+        return 1
+    fi
+
+    if echo "$response" | jq -e '.response | select(.uuid != null)' > /dev/null; then
+        echo -e "${COLOR_GREEN}${LANG[TEMPLATE_UPDATED_SUCCESS]}${COLOR_RESET}"
+        return 0
+    else
+        echo -e "${COLOR_RED}${LANG[ERROR_UPDATE_TEMPLATE]}: ${LANG[TEMPLATE_NOT_APPLIED]}${COLOR_RESET}"
+        return 1
+    fi
 }
 
 show_sub_page_menu() {
@@ -2139,7 +2466,7 @@ branding_add_to_appconfig() {
     echo -e "${COLOR_YELLOW}1. ${LANG[BRANDING_SUPPORT_YES]}${COLOR_RESET}"
     echo -e "${COLOR_YELLOW}2. ${LANG[BRANDING_SUPPORT_NO]}${COLOR_RESET}"
     echo -e ""
-    reading "${LANG[EXTENSIONS_PROMPT]}" BRANDING_OPTION
+    reading "Select option (1-2):" BRANDING_OPTION
 
     case $BRANDING_OPTION in
         1)
@@ -2156,7 +2483,6 @@ branding_add_to_appconfig() {
                    "logoUrl": $logoUrl
                }' "$config_file" > "${config_file}.tmp" && mv "${config_file}.tmp" "$config_file"
             
-            echo -e ""
             echo -e "${COLOR_GREEN}${LANG[BRANDING_ADDED_SUCCESS]}${COLOR_RESET}"
             ;;
         2)
@@ -2192,7 +2518,6 @@ manage_sub_page_upload() {
             [ -f "$index_file" ] && rm -f "$index_file"
 
             echo -e "${COLOR_YELLOW}${LANG[UPLOADING_SUB_PAGE]}${COLOR_RESET}"
-            echo -e ""
             local primary_url="https://raw.githubusercontent.com/legiz-ru/my-remnawave/refs/heads/main/sub-page/app-config.json"
             local fallback_url="https://cdn.jsdelivr.net/gh/legiz-ru/my-remnawave@main/sub-page/app-config.json"
             if [ "$SUB_PAGE_OPTION" == "2" ]; then
@@ -2221,7 +2546,6 @@ manage_sub_page_upload() {
             [ -f "$index_file" ] && rm -f "$index_file"
 
             echo -e "${COLOR_YELLOW}${LANG[UPLOADING_SUB_PAGE]}${COLOR_RESET}"
-            echo -e ""
             local primary_index_url="https://raw.githubusercontent.com/legiz-ru/Orion/refs/heads/main/index.html"
             local fallback_index_url="https://cdn.jsdelivr.net/gh/legiz-ru/Orion@main/index.html"
             if ! download_with_fallback "$primary_index_url" "$fallback_index_url" "$index_file"; then
@@ -2285,7 +2609,6 @@ manage_sub_page_upload() {
             [ -f "$index_file" ] && rm -f "$index_file"
 
             echo -e "${COLOR_YELLOW}${LANG[UPLOADING_SUB_PAGE]}${COLOR_RESET}"
-            echo -e ""
             local primary_index_url="https://raw.githubusercontent.com/legiz-ru/material-remnawave-subscription-page/refs/heads/main/index.html"
             local fallback_index_url="https://cdn.jsdelivr.net/gh/legiz-ru/material-remnawave-subscription-page@main/index.html"
             if ! download_with_fallback "$primary_index_url" "$fallback_index_url" "$index_file"; then
@@ -2347,7 +2670,6 @@ manage_sub_page_upload() {
             [ -f "$config_file" ] && rm -f "$config_file"
 
             echo -e "${COLOR_YELLOW}${LANG[UPLOADING_SUB_PAGE]}${COLOR_RESET}"
-            echo -e ""
             local primary_url="https://raw.githubusercontent.com/legiz-ru/my-remnawave/refs/heads/main/sub-page/customweb/clash-sing/index.html"
             local fallback_url="https://cdn.jsdelivr.net/gh/legiz-ru/my-remnawave@main/sub-page/customweb/clash-sing/index.html"
             if ! download_with_fallback "$primary_url" "$fallback_url" "$index_file"; then
@@ -2448,7 +2770,6 @@ edit_branding() {
     
     # Check if branding exists
     if jq -e '.config.branding' "$config_file" > /dev/null 2>&1; then
-        echo -e ""
         echo -e "${COLOR_GREEN}${LANG[BRANDING_CURRENT_VALUES]}${COLOR_RESET}"
         local logo_url=$(jq -r '.config.branding.logoUrl // "N/A"' "$config_file")
         local name=$(jq -r '.config.branding.name // "N/A"' "$config_file")
@@ -2508,7 +2829,6 @@ edit_branding() {
     
     # Restart container if changes were made
     if [ "$needs_restart" = true ]; then
-        echo -e ""
         echo -e "${COLOR_GREEN}${LANG[BRANDING_ADDED_SUCCESS]}${COLOR_RESET}"
         
         # Restart subscription page container
@@ -2624,7 +2944,7 @@ delete_applications() {
         echo -e "${COLOR_YELLOW}${LANG[EXIT]}${COLOR_RESET}"
     fi
 }
-#Extensions by legiz
+#Custom Templates and Extensions by legiz
 
 add_cron_rule() {
     local rule="$1"
@@ -2643,8 +2963,8 @@ spinner() {
   local pid=$1
   local text=$2
 
-  export LC_ALL=C.UTF-8
-  export LANG=C.UTF-8
+  export LC_ALL=en_US.UTF-8
+  export LANG=en_US.UTF-8
 
   local spinstr='⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'
   local text_code="$COLOR_GREEN"
@@ -2846,6 +3166,26 @@ install_packages() {
             echo -e "${COLOR_RED}${LANG[START_CRON_ERROR]}${COLOR_RESET}" >&2
             return 1
         fi
+    fi
+
+    if [ ! -f /etc/locale.gen ]; then
+        echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
+    fi
+    if ! grep -q "^en_US.UTF-8 UTF-8" /etc/locale.gen; then
+        if grep -q "^# en_US.UTF-8 UTF-8" /etc/locale.gen; then
+            sed -i 's/^# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
+        else
+            echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+        fi
+    fi
+    if ! locale-gen || ! update-locale LANG=en_US.UTF-8; then
+        echo -e "${COLOR_RED}${LANG[ERROR_CONFIGURE_LOCALES]}${COLOR_RESET}" >&2
+        return 1
+    fi
+
+    if ! ping -c 1 download.docker.com >/dev/null 2>&1; then
+        echo -e "${COLOR_RED}${LANG[ERROR_DOCKER_DNS]}${COLOR_RESET}" >&2
+        return 1
     fi
 
     if grep -q "Ubuntu" /etc/os-release; then
@@ -3533,19 +3873,15 @@ register_remnawave() {
 
 get_panel_token() {
     TOKEN_FILE="${DIR_REMNAWAVE}/token"
+    ENV_FILE="/opt/remnawave/.env"
     local domain_url="127.0.0.1:3000"
     
-    local auth_status=$(make_api_request "GET" "http://${domain_url}/api/auth/status" "")
     local oauth_enabled=false
-
-    if [ -n "$auth_status" ]; then
-        local github_enabled=$(echo "$auth_status" | jq -r '.response.authentication.oauth2.providers.github // false' 2>/dev/null)
-        local yandex_enabled=$(echo "$auth_status" | jq -r '.response.authentication.oauth2.providers.yandex // false' 2>/dev/null)
-        local pocketid_enabled=$(echo "$auth_status" | jq -r '.response.authentication.oauth2.providers.pocketid // false' 2>/dev/null)
-        local telegram_enabled=$(echo "$auth_status" | jq -r '.response.authentication.tgAuth.enabled // false' 2>/dev/null)
-        
-        if [ "$github_enabled" = "true" ] || [ "$yandex_enabled" = "true" ] || \
-           [ "$pocketid_enabled" = "true" ] || [ "$telegram_enabled" = "true" ]; then
+    if [ -f "$ENV_FILE" ]; then
+        if grep -q "^TELEGRAM_OAUTH_ENABLED=true" "$ENV_FILE" || \
+           grep -q "^OAUTH2_GITHUB_ENABLED=true" "$ENV_FILE" || \
+           grep -q "^OAUTH2_POCKETID_ENABLED=true" "$ENV_FILE" || \
+           grep -q "^OAUTH2_YANDEX_ENABLED=true" "$ENV_FILE"; then
             oauth_enabled=true
         fi
     fi
@@ -3624,9 +3960,16 @@ get_public_key() {
         echo -e "${COLOR_RED}${LANG[ERROR_EXTRACT_PUBLIC_KEY]}${COLOR_RESET}"
     fi
 
-    sed -i "s|SECRET_KEY=\"PUBLIC KEY FROM REMNAWAVE-PANEL\"|SECRET_KEY=\"$pubkey\"|g" "$target_dir/docker-compose.yml"
+    local env_node_file="$target_dir/.env-node"
+    cat > "$env_node_file" <<EOL
+### APP ###
+APP_PORT=2222
 
-    echo -e "${COLOR_GREEN}${LANG[PUBLIC_KEY_SUCCESS]}${COLOR_RESET}"
+### XRAY ###
+SSL_CERT="$pubkey"
+EOL
+    echo -e "${COLOR_YELLOW}${LANG[PUBLIC_KEY_SUCCESS]}${COLOR_RESET}"
+    echo "$pubkey"
 }
 
 generate_xray_keys() {
@@ -4063,15 +4406,15 @@ handle_certificates() {
         echo -e "${COLOR_YELLOW}${LANG[ADDING_CRON_FOR_EXISTING_CERTS]}${COLOR_RESET}"
         if [ "$min_days_left" -le 30 ]; then
             echo -e "${COLOR_YELLOW}${LANG[CERT_EXPIRY_SOON]} $min_days_left ${LANG[DAYS]}${COLOR_RESET}"
-            add_cron_rule "0 5 * * 0 $cron_command"
+            add_cron_rule "0 5 * * * $cron_command"
         else
-            add_cron_rule "0 5 * * 0 $cron_command"
+            add_cron_rule "0 5 1 */2 * $cron_command"
         fi
-    elif [ "$min_days_left" -le 30 ] && ! crontab -u root -l 2>/dev/null | grep -q "0 5 * * 0.*$cron_command"; then
+    elif [ "$min_days_left" -le 30 ] && ! crontab -u root -l 2>/dev/null | grep -q "0 5 * * *.*$cron_command"; then
         echo -e "${COLOR_YELLOW}${LANG[CERT_EXPIRY_SOON]} $min_days_left ${LANG[DAYS]}${COLOR_RESET}"
         echo -e "${COLOR_YELLOW}${LANG[UPDATING_CRON]}${COLOR_RESET}"
         crontab -u root -l 2>/dev/null | grep -v "/usr/bin/certbot renew" | crontab -u root -
-        add_cron_rule "0 5 * * 0 $cron_command"
+        add_cron_rule "0 5 * * * $cron_command"
     else
         echo -e "${COLOR_YELLOW}${LANG[CRON_ALREADY_EXISTS]}${COLOR_RESET}"
     fi
@@ -4142,6 +4485,14 @@ install_remnawave() {
     JWT_AUTH_SECRET=$(openssl rand -base64 48 | tr -dc 'a-zA-Z0-9' | head -c 64)
     JWT_API_TOKENS_SECRET=$(openssl rand -base64 48 | tr -dc 'a-zA-Z0-9' | head -c 64)
 
+    cat > .env-node <<EOL
+### APP ###
+APP_PORT=2222
+
+### XRAY ###
+SSL_CERT="PUBLIC KEY FROM REMNAWAVE-PANEL"
+EOL
+
     cat > .env <<EOL
 ### APP ###
 APP_PORT=3000
@@ -4174,13 +4525,48 @@ IS_TELEGRAM_NOTIFICATIONS_ENABLED=false
 TELEGRAM_BOT_TOKEN=change_me
 TELEGRAM_NOTIFY_USERS_CHAT_ID=change_me
 TELEGRAM_NOTIFY_NODES_CHAT_ID=change_me
-TELEGRAM_NOTIFY_CRM_CHAT_ID=change_me
+
+### Telegram Oauth (Login with Telegram)
+### Docs https://remna.st/docs/features/telegram-oauth
+### true/false
+TELEGRAM_OAUTH_ENABLED=false
+### Array of Admin Chat Ids. These ids will be allowed to login.
+TELEGRAM_OAUTH_ADMIN_IDS=[123, 321]
 
 # Optional
 # Only set if you want to use topics
 TELEGRAM_NOTIFY_USERS_THREAD_ID=
 TELEGRAM_NOTIFY_NODES_THREAD_ID=
 TELEGRAM_NOTIFY_CRM_THREAD_ID=
+
+# Enable Github OAuth2, possible values: true, false
+OAUTH2_GITHUB_ENABLED=false
+# Github client ID, you can get it from Github application settings
+OAUTH2_GITHUB_CLIENT_ID="REPLACE_WITH_YOUR_CLIENT_ID"
+# Github client secret, you can get it from Github application settings
+OAUTH2_GITHUB_CLIENT_SECRET="REPLACE_WITH_YOUR_CLIENT_SECRET"
+# List of allowed emails, separated by commas
+OAUTH2_GITHUB_ALLOWED_EMAILS=["admin@example.com", "user@example.com"]
+
+# Enable PocketID OAuth2, possible values: true, false
+OAUTH2_POCKETID_ENABLED=false
+# PocketID Client ID, you can get it from OIDC Client settings
+OAUTH2_POCKETID_CLIENT_ID="REPLACE_WITH_YOUR_CLIENT_ID"
+# PocketID Client Secret, you can get it from OIDC Client settings
+OAUTH2_POCKETID_CLIENT_SECRET="REPLACE_WITH_YOUR_CLIENT_SECRET"
+# Plain domain where PocketID is hosted, do not place any paths here. Just plain domain.
+OAUTH2_POCKETID_PLAIN_DOMAIN="pocketid.domain.com"
+# List of allowed emails, separated by commas
+OAUTH2_POCKETID_ALLOWED_EMAILS=["admin@example.com", "user@example.com"]
+
+# Enable Yandex OAuth2, possible values: true, false
+OAUTH2_YANDEX_ENABLED=false
+# Yandex Client ID, you can get it from OIDC Client settings
+OAUTH2_YANDEX_CLIENT_ID="REPLACE_WITH_YOUR_CLIENT_ID"
+# Yandex Client Secret, you can get it from OIDC Client settings
+OAUTH2_YANDEX_CLIENT_SECRET="REPLACE_WITH_YOUR_CLIENT_SECRET"
+# List of allowed emails, separated by commas
+OAUTH2_YANDEX_ALLOWED_EMAILS=["admin@example.com", "user@example.com"]
 
 ### FRONT_END ###
 # Used by CORS, you can leave it as * or place your domain there
@@ -4197,7 +4583,7 @@ SUB_PUBLIC_DOMAIN=$SUB_DOMAIN
 ### SWAGGER ###
 SWAGGER_PATH=/docs
 SCALAR_PATH=/scalar
-IS_DOCS_ENABLED=false
+IS_DOCS_ENABLED=true
 
 ### PROMETHEUS ###
 ### Metrics are available at /api/metrics
@@ -4240,7 +4626,7 @@ EOL
     cat > docker-compose.yml <<EOL
 services:
   remnawave-db:
-    image: postgres:18.1
+    image: postgres:18
     container_name: 'remnawave-db'
     hostname: remnawave-db
     restart: always
@@ -4269,7 +4655,7 @@ services:
         max-file: '5'
 
   remnawave:
-    image: remnawave/backend:2
+    image: remnawave/backend:2.2.6
     container_name: remnawave
     hostname: remnawave
     restart: always
@@ -4297,7 +4683,7 @@ services:
         max-file: '5'
 
   remnawave-redis:
-    image: valkey/valkey:9.0.0-alpine
+    image: valkey/valkey:8.1.4-alpine
     container_name: remnawave-redis
     hostname: remnawave-redis
     restart: always
@@ -4402,9 +4788,8 @@ installation() {
     hostname: remnanode
     restart: always
     network_mode: host
-    environment:
-      - NODE_PORT=2222
-      - SECRET_KEY="PUBLIC KEY FROM REMNAWAVE-PANEL"
+    env_file:
+      - .env-node
     volumes:
       - /dev/shm:/dev/shm:rw
     logging:
@@ -4554,13 +4939,11 @@ server {
 
     root /var/www/html;
     index index.html;
-    add_header X-Robots-Tag "noindex, nofollow, noarchive, nosnippet, noimageindex" always;
 }
 
 server {
     listen unix:/dev/shm/nginx.sock ssl proxy_protocol default_server;
     server_name _;
-    add_header X-Robots-Tag "noindex, nofollow, noarchive, nosnippet, noimageindex" always;
     ssl_reject_handshake on;
     return 444;
 }
@@ -4583,18 +4966,12 @@ EOL
     sleep 20
 
     echo -e "${COLOR_YELLOW}${LANG[CHECK_CONTAINERS]}${COLOR_RESET}"
-    local attempts=0
-    local max_attempts=5
-    until curl -s -f --max-time 30 "http://$domain_url/api/auth/status" \
+    until curl -s "http://$domain_url/api/auth/register" \
         --header 'X-Forwarded-For: 127.0.0.1' \
         --header 'X-Forwarded-Proto: https' \
         > /dev/null; do
-        attempts=$((attempts + 1))
-        if [ "$attempts" -ge "$max_attempts" ]; then
-            error "$(printf "${LANG[CONTAINERS_TIMEOUT]}" $max_attempts)"
-        fi
-        echo -e "${COLOR_RED}$(printf "${LANG[CONTAINERS_NOT_READY_ATTEMPT]}" $attempts $max_attempts)${COLOR_RESET}"
-        sleep 60
+        echo -e "${COLOR_RED}${LANG[CONTAINERS_NOT_READY]}${COLOR_RESET}"
+        sleep 10
     done
 
     # Register Remnawave
@@ -4604,7 +4981,8 @@ EOL
     # Get public key
     echo -e "${COLOR_YELLOW}${LANG[GET_PUBLIC_KEY]}${COLOR_RESET}"
     sleep 1
-    get_public_key "$domain_url" "$token" "$target_dir"
+    local pubkey=$(get_public_key "$domain_url" "$token" "$target_dir")
+    echo -e "${COLOR_GREEN}${LANG[PUBLIC_KEY_SUCCESS]}${COLOR_RESET}"
 
     # Generate Xray keys
     echo -e "${COLOR_YELLOW}${LANG[GENERATE_KEYS]}${COLOR_RESET}"
@@ -4744,13 +5122,48 @@ IS_TELEGRAM_NOTIFICATIONS_ENABLED=false
 TELEGRAM_BOT_TOKEN=change_me
 TELEGRAM_NOTIFY_USERS_CHAT_ID=change_me
 TELEGRAM_NOTIFY_NODES_CHAT_ID=change_me
-TELEGRAM_NOTIFY_CRM_CHAT_ID=change_me
+
+### Telegram Oauth (Login with Telegram)
+### Docs https://remna.st/docs/features/telegram-oauth
+### true/false
+TELEGRAM_OAUTH_ENABLED=false
+### Array of Admin Chat Ids. These ids will be allowed to login.
+TELEGRAM_OAUTH_ADMIN_IDS=[123, 321]
 
 # Optional
 # Only set if you want to use topics
 TELEGRAM_NOTIFY_USERS_THREAD_ID=
 TELEGRAM_NOTIFY_NODES_THREAD_ID=
 TELEGRAM_NOTIFY_CRM_THREAD_ID=
+
+# Enable Github OAuth2, possible values: true, false
+OAUTH2_GITHUB_ENABLED=false
+# Github client ID, you can get it from Github application settings
+OAUTH2_GITHUB_CLIENT_ID="REPLACE_WITH_YOUR_CLIENT_ID"
+# Github client secret, you can get it from Github application settings
+OAUTH2_GITHUB_CLIENT_SECRET="REPLACE_WITH_YOUR_CLIENT_SECRET"
+# List of allowed emails, separated by commas
+OAUTH2_GITHUB_ALLOWED_EMAILS=["admin@example.com", "user@example.com"]
+
+# Enable PocketID OAuth2, possible values: true, false
+OAUTH2_POCKETID_ENABLED=false
+# PocketID Client ID, you can get it from OIDC Client settings
+OAUTH2_POCKETID_CLIENT_ID="REPLACE_WITH_YOUR_CLIENT_ID"
+# PocketID Client Secret, you can get it from OIDC Client settings
+OAUTH2_POCKETID_CLIENT_SECRET="REPLACE_WITH_YOUR_CLIENT_SECRET"
+# Plain domain where PocketID is hosted, do not place any paths here. Just plain domain.
+OAUTH2_POCKETID_PLAIN_DOMAIN="pocketid.domain.com"
+# List of allowed emails, separated by commas
+OAUTH2_POCKETID_ALLOWED_EMAILS=["admin@example.com", "user@example.com"]
+
+# Enable Yandex OAuth2, possible values: true, false
+OAUTH2_YANDEX_ENABLED=false
+# Yandex Client ID, you can get it from OIDC Client settings
+OAUTH2_YANDEX_CLIENT_ID="REPLACE_WITH_YOUR_CLIENT_ID"
+# Yandex Client Secret, you can get it from OIDC Client settings
+OAUTH2_YANDEX_CLIENT_SECRET="REPLACE_WITH_YOUR_CLIENT_SECRET"
+# List of allowed emails, separated by commas
+OAUTH2_YANDEX_ALLOWED_EMAILS=["admin@example.com", "user@example.com"]
 
 ### FRONT_END ###
 # Used by CORS, you can leave it as * or place your domain there
@@ -4767,7 +5180,7 @@ SUB_PUBLIC_DOMAIN=$SUB_DOMAIN
 ### SWAGGER ###
 SWAGGER_PATH=/docs
 SCALAR_PATH=/scalar
-IS_DOCS_ENABLED=false
+IS_DOCS_ENABLED=true
 
 ### PROMETHEUS ###
 ### Metrics are available at /api/metrics
@@ -4810,7 +5223,7 @@ EOL
     cat > docker-compose.yml <<EOL
 services:
   remnawave-db:
-    image: postgres:18.1
+    image: postgres:18
     container_name: 'remnawave-db'
     hostname: remnawave-db
     restart: always
@@ -4839,7 +5252,7 @@ services:
         max-file: '5'
 
   remnawave:
-    image: remnawave/backend:2
+    image: remnawave/backend:2.2.6
     container_name: remnawave
     hostname: remnawave
     restart: always
@@ -4867,7 +5280,7 @@ services:
         max-file: '5'
 
   remnawave-redis:
-    image: valkey/valkey:9.0.0-alpine
+    image: valkey/valkey:8.1.4-alpine
     container_name: remnawave-redis
     hostname: remnawave-redis
     restart: always
@@ -5097,18 +5510,12 @@ EOL
 
     local domain_url="127.0.0.1:3000"
     echo -e "${COLOR_YELLOW}${LANG[CHECK_CONTAINERS]}${COLOR_RESET}"
-    local attempts=0
-    local max_attempts=5
-    until curl -s -f --max-time 30 "http://$domain_url/api/auth/status" \
+    until curl -s "http://$domain_url/api/auth/register" \
         --header 'X-Forwarded-For: 127.0.0.1' \
         --header 'X-Forwarded-Proto: https' \
         > /dev/null; do
-        attempts=$((attempts + 1))
-        if [ "$attempts" -ge "$max_attempts" ]; then
-            error "$(printf "${LANG[CONTAINERS_TIMEOUT]}" $max_attempts)"
-        fi
-        echo -e "${COLOR_RED}$(printf "${LANG[CONTAINERS_NOT_READY_ATTEMPT]}" $attempts $max_attempts)${COLOR_RESET}"
-        sleep 60
+        echo -e "${COLOR_RED}${LANG[CONTAINERS_NOT_READY]}${COLOR_RESET}"
+        sleep 5
     done
 
     # Register Remnawave
@@ -5210,6 +5617,14 @@ install_remnawave_node() {
         exit 1
     fi
 
+cat > .env-node <<EOL
+### APP ###
+APP_PORT=2222
+
+### XRAY ###
+$(echo -e "$CERTIFICATE" | sed 's/\\n$//')
+EOL
+
 SELFSTEAL_BASE_DOMAIN=$(extract_domain "$SELFSTEAL_DOMAIN")
 
 unique_domains["$SELFSTEAL_BASE_DOMAIN"]=1
@@ -5273,9 +5688,9 @@ installation_node() {
     hostname: remnanode
     restart: always
     network_mode: host
-    environment:
-      - NODE_PORT=2222
-      - SECRET_KEY=$(echo -e "$CERTIFICATE")
+    env_file:
+      - path: /opt/remnawave/.env-node
+        required: false
     volumes:
       - /dev/shm:/dev/shm:rw
     logging:
@@ -5310,13 +5725,11 @@ server {
 
     root /var/www/html;
     index index.html;
-    add_header X-Robots-Tag "noindex, nofollow, noarchive, nosnippet, noimageindex" always;
 }
 
 server {
     listen unix:/dev/shm/nginx.sock ssl proxy_protocol default_server;
     server_name _;
-    add_header X-Robots-Tag "noindex, nofollow, noarchive, nosnippet, noimageindex" always;
     ssl_reject_handshake on;
     return 444;
 }
