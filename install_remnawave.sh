@@ -4,7 +4,7 @@ SCRIPT_VERSION="2.1.10a"
 UPDATE_AVAILABLE=false
 DIR_REMNAWAVE="/usr/local/remnawave_reverse/"
 LANG_FILE="${DIR_REMNAWAVE}selected_language"
-SCRIPT_URL="https://raw.githubusercontent.com/eGamesAPI/remnawave-reverse-proxy/refs/heads/main/install_remnawave.sh"
+SCRIPT_URL="https://raw.githubusercontent.com/arslansai90/remnawave-reverse-proxy/refs/heads/main/install_remnawave.sh"
 
 COLOR_RESET="\033[0m"
 COLOR_GREEN="\033[1;32m"
@@ -4763,7 +4763,7 @@ installation() {
         max-file: '5'
 
   remnawave-subscription-page:
-    image: remnawave/subscription-page:latest
+    image: remnawave/subscription-page:6.0.8
     container_name: remnawave-subscription-page
     hostname: remnawave-subscription-page
     restart: always
@@ -5353,7 +5353,7 @@ installation_panel() {
         max-file: '5'
 
   remnawave-subscription-page:
-    image: remnawave/subscription-page:latest
+    image: remnawave/subscription-page:6.0.8
     container_name: remnawave-subscription-page
     hostname: remnawave-subscription-page
     restart: always
