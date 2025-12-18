@@ -4763,7 +4763,7 @@ installation() {
         max-file: '5'
 
   remnawave-subscription-page:
-    image: remnawave/subscription-page:2.2.6
+    image: remnawave/subscription-page:latest
     container_name: remnawave-subscription-page
     hostname: remnawave-subscription-page
     restart: always
@@ -5353,7 +5353,7 @@ installation_panel() {
         max-file: '5'
 
   remnawave-subscription-page:
-    image: remnawave/subscription-page:2.2.6
+    image: remnawave/subscription-page:latest
     container_name: remnawave-subscription-page
     hostname: remnawave-subscription-page
     restart: always
