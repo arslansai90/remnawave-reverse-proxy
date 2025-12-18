@@ -4626,7 +4626,7 @@ EOL
     cat > docker-compose.yml <<EOL
 services:
   remnawave-db:
-    image: postgres:18
+    image: postgres:17
     container_name: 'remnawave-db'
     hostname: remnawave-db
     restart: always
@@ -5223,7 +5223,7 @@ EOL
     cat > docker-compose.yml <<EOL
 services:
   remnawave-db:
-    image: postgres:18
+    image: postgres:17
     container_name: 'remnawave-db'
     hostname: remnawave-db
     restart: always
