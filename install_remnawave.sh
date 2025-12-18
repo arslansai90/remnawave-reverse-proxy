@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SCRIPT_VERSION="2.1.10a"
+SCRIPT_VERSION="1.0.0"
 UPDATE_AVAILABLE=false
 DIR_REMNAWAVE="/usr/local/remnawave_reverse/"
 LANG_FILE="${DIR_REMNAWAVE}selected_language"
